@@ -1,0 +1,3 @@
+- Các bước khởi tạo dự án:
+- Cài đặt file node modules ở file package.json  folder api và folder fiver_ui : npm i
+- chạy dự án :  npm start ở file package.json api  +  npm run dev ở file package.json  fiver_ui
