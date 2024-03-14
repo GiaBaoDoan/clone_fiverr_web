@@ -1,0 +1,44 @@
+.categoriesNav {
+    display: flex;
+    justify-content: center;
+    padding: 100px 50px;
+    h2 {
+        font-family: 'Montserrat', sans-serif !important;
+        font-size: 32px;
+    }
+    .container {
+        width: 1440px;
+        .items {
+             display: grid;
+             padding: 50px 0;
+             gap:50px;
+             grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+            .item {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                .title {
+                    font-weight: 500;
+                    margin-top: 10px;
+                }
+                a {
+                    .line {
+                        border-bottom: 2px solid rgb(177, 176, 176)  ;
+                        transition: all 0.3s;
+                    } 
+                    &:hover {
+                        .line {
+                            transform: scaleX(2);
+                            border-color :  #1dbf73;
+                        }
+                    }
+                    img {
+                        width: 48px;
+                        height: 48px;
+                    }
+                }
+              
+            }
+        }
+    }
+}

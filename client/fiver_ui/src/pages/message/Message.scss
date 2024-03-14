@@ -1,0 +1,304 @@
+.message {
+    padding: 50px 0;
+    justify-content: center;
+    span,a,textarea,button,p {
+        font-family: 'Montserrat', sans-serif;
+    }
+    a {
+        text-decoration: none;
+    }
+    .container {
+        .breadcrumbs {
+            align-items: center;
+            gap: 10px;
+            display: flex;
+            span {
+                font-weight: 600;
+            }
+        }
+        section {
+            display: flex;
+            justify-content: space-between;
+            color: #62646a ;
+            font-weight: 500;
+            .left-section {
+                    align-self: flex-start;
+                    padding: 30px;   
+                    flex:1; 
+                    .wrap-userItem {
+                        &:hover {
+                            background-color: rgba(0, 0, 0, 0.03);
+                        } 
+                    }  
+                    .filter-message {
+                       .All-message,svg {
+                        color: #000000;
+                        cursor: pointer;
+                       }
+                        .list-message {
+                            padding: 20px 0;
+                            .user-item {
+                                display: flex;
+                                align-items: center;
+                                cursor: pointer;
+                                border-radius: 20px;
+                                .user-online {
+                                    position: relative;
+                                    .dot {
+                                        position: absolute;
+                                        width: 11px;
+                                        height: 11px;
+                                        top: calc(50%);
+                                        right: -3px;
+                                        transform: translateY(4px);
+                                        border: 2px solid #fff;
+                                        border-radius: 100%;
+                                        background-color: #1dbf73;
+                                    }
+                                }                    
+                              
+                                gap: 12px;
+                                .user-name {
+                                    font-weight: 600;
+                                    color: #000000;
+                                }
+                                .updatedAt {
+                                    font-size: 14px;
+                                    font-weight: 500;
+                                }
+                              
+                            }
+
+                            .user-info {
+                                display: flex;
+                                flex-direction: column;
+                                gap: 12px;
+                                flex:1;
+                                .top {
+                                    display: flex;
+                                    justify-content: space-between;
+                                    flex:1
+                                }
+                                .bottom {
+                                    display: flex;
+                                    justify-content: space-between;
+                                    .readMessage,.star {
+                                        &:hover {
+                                            fill: #000000;
+                                        }
+                                    }
+                                    span {
+                                        display: flex;
+                                        gap: 10px;
+                                    }
+                                }
+                            }
+                            img {
+                                width: 50px;
+                                height: 50px;
+                                border-radius: 100%;
+                            }
+
+                        }
+                        .header-filter{
+                            display: flex;
+                            gap: 10px;
+                            align-items: center;
+                            justify-content: space-between;
+                            .filter {
+                                display: flex;
+                                align-items: center;
+                                font-weight: 600;
+                                gap: 10px;
+                                font-size: 18px;
+                                
+
+                            }
+                        }
+                    }         
+
+            }
+            .wrap-message {
+                border: 1px solid lightgray;
+                border-radius: 40px;
+                flex: 4;      
+                position: relative;
+                .backToBottom {
+                    position: absolute;
+                    bottom: 20%;
+                    right: 35px;
+                    background-color: white;
+                    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+                    display: flex;
+                    align-items: center;
+                    border-radius: 100%;
+                    cursor: pointer;
+                    padding: 10px;
+                    
+                    
+                }
+                .header-message {
+                    padding: 30px 50px;
+                    border-bottom:1px solid lightgray ;
+                    display: flex;
+                    justify-content: space-between;
+                    .left {
+                        display: flex;
+                        flex-direction: column;
+                        p {
+                            display: flex;
+                            gap: 10px;
+                            align-items: center;
+                            .dot {
+                                width: 15px;
+                                height: 15px;
+                                border-radius: 100%;
+                                background-color: #1dbf73;
+                            }
+                        }
+                        .username {
+                            font-weight: 600;
+                            text-decoration: underline;
+                        }
+                    }
+                    div {
+                        display: flex;
+                        gap: 10px;
+                        svg {
+                            cursor: pointer;
+                        }
+                    }
+                }
+                .messages {    
+                    gap: 15px;
+                    max-height: 380px;
+                    overflow: auto;
+                    display: flex;
+                    justify-content: space-between;
+                    flex-direction: column;
+                    .security {
+                        display: flex;
+                        justify-content: center;
+                        gap: 10px;
+                        .wrap-sec {
+                            display: flex;
+                            flex-direction: column;
+                            gap: 10px;
+                          
+                        }
+                        p {
+                            align-self: center;
+                        }
+                        .top {
+                            display: flex;
+                            align-items: center;
+                            gap: 10px;
+                            .line-gray {
+                                height: 1px ;
+                                background-color: #62646a;
+                                flex:2;
+                            }
+                        }
+                    }
+                    .warp {
+                        display: flex;
+                        flex-direction: column;
+                        .person-send {
+                            display: flex;
+                            flex-direction: column;
+                            align-items: flex-start;
+                            gap: 25px;
+                            .time-name {
+                                display: flex;
+                                align-items: center;
+                                gap: 10px;
+                                .time {
+                                    font-size: 14px;
+                                }
+                            }
+                            .person-name {
+                                font-weight: 600;
+                                color: #000000;
+                            }
+
+                        }
+                        .item {
+                            max-width: 800px;
+                            padding: 15px 30px ;
+                            display: flex;
+                            align-items: flex-start;
+                            gap: 15px;
+                            cursor: pointer;
+                            border-radius: 12px;
+                            &:hover {
+                                background-color: rgba(0,0,0,0.03);
+                            }
+                            img {
+                                width: 40px;
+                                height: 40px;
+                                object-fit: cover;
+                                border-radius: 100%;
+                            }
+                           
+                          
+                        }
+                    }
+                  
+                }
+            }
+            .wrap-send {
+                padding: 30px;
+                display: flex;
+                gap: 20px;
+                flex-direction: column;
+                .write {
+                    display: flex;
+                    hr {
+                        height: 0;
+                        border : 0.5px solid lightgrey;
+                        margin-bottom: 20px;
+                    }
+                    div {
+                        flex:1;
+                        display: flex;
+                        justify-content: center;
+                        align-self: center;
+                
+                    }
+                    textarea {
+                        border-radius: 15px;
+                        outline: none;
+                        border: 1px solid lightgray;
+                        height: 20px;
+                        padding: 15px;
+                        flex: 1;
+                        font-size: 16px;
+                        resize:  none;
+                    }
+                }
+                .send {
+                    display: flex;
+                    justify-content: space-between;
+                    .icons {
+                        display: flex;
+                        gap: 20px;
+                    }
+                    div {
+                        span {
+                            display: flex;
+                            align-items: center;
+                            font-weight: 600;
+                            gap: 10px;
+                            color: #000000;
+                            cursor: pointer;
+                        }
+                    }
+                }
+            }
+            .right-section {
+                flex:1;
+            }
+        }
+    }
+   
+}

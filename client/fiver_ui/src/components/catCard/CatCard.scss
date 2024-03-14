@@ -1,0 +1,49 @@
+.catCard {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    width:252px ;
+    height: 344px;
+    margin-top: 20px;
+    cursor: pointer;
+    &:hover {
+        .overlay {
+            opacity: 0.3;
+        }
+    } 
+    .overlay {
+    position: absolute;
+    transition: all 0.4s;
+        background-color: black;
+        top: 0;
+        left: 0;
+        width: 252px;
+        height: 100%;
+        opacity: 0.5;
+    }
+    a {
+        width: 100%;
+        height: 100%;
+        .info{
+            position: absolute;
+            top:0;
+            left: 0;
+            color: white;
+            padding: 20px;
+            .desc {
+                padding: 0;
+                color: white;
+            }
+            .title {
+                font-size: 24px;
+                font-weight: 700;
+            }
+        }
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+          
+        }
+    }
+}

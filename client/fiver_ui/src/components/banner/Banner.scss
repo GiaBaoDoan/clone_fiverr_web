@@ -1,0 +1,38 @@
+.banner {
+    display: flex;
+    justify-content: center;
+    padding: 100px 0;
+    .container {
+        background-color: #446ee7;
+        width: 1440px;
+        display: flex;
+        .content {
+            background-image: url('https://fiverr-res.cloudinary.com/q_auto,f_auto,w_1160,dpr_1.0/v1/attachments/generic_asset/asset/b49b1963f5f9008f5ff88bd449ec18f7-1608035772453/logo-maker-banner-wide-desktop-1352-2x.png');
+            background-size: cover;
+            background-position: center;
+            padding: 80px ;
+            display: flex;
+            flex: 1;
+            flex-direction: column;
+            gap: 10px;
+            h2 {
+                color: white;
+            }
+            p {
+                color: white;
+            }
+            button {
+                color: #446ee7;
+                padding: 10px;
+                border : none;
+                background: #fff;
+                font-size: 18px;
+                border-radius: 4px;
+                font-weight: 600;
+                margin-top: 20px;
+                align-self: flex-start;
+                cursor: pointer;
+            }
+        }
+    }
+}

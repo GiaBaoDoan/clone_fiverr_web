@@ -1,0 +1,125 @@
+POST http://localhost:8080/api/auth/register
+content-Type: application/json
+
+{   
+
+   "username" : "ok",
+   "email" :"ok@gmail.com",
+   "password" : "123",
+   "country" : "NBA",
+   "isSeller" : false
+
+}
+###
+POST http://localhost:8080/api/auth/login
+content-Type: application/json
+
+{   
+
+   "username" : "Nazim Hameed",
+   "password" : "123"
+
+}
+###
+DELETE http://localhost:8080/api/users/deleteUser/65ce0bf1530dea5965754b7c
+
+###
+GET http://localhost:8080/api/users/65d2f40dac99c132f848b137
+
+###
+GET http://localhost:8080/api/getAll
+
+###
+GET http://localhost:8080/api/users/
+###
+POST http://localhost:8080/api/gigs/createGig
+content-Type: application/json
+
+{   
+    "title": "I will do premium creative minimalist business logo design",
+    "desc": "This is my gigs i hope you could enjoy it",
+    "totalStars": 4,
+    "starNumber": 2,
+    "cat": "art",
+    "price": 110,
+    "cover": "https://fiverr-res.cloudinary.com/t_gig_cards_web,q_auto,f_auto/gigs/194009784/original/5d2ce9be504e32084e203aaf20151469c65107b3.jpg",
+    "images": ["https://fiverr-res.cloudinary.com/images/t_main1,q_auto,f_auto,q_auto,f_auto/gigs3/128213838/original/648bfbe7f428532589cf3d0df5a0f2b83d14b3f4/design-flat-minimal-logo.jpg","https://fiverr-res.cloudinary.com/images/t_main1,q_auto,f_auto,q_auto,f_auto/gigs3/128213838/original/648bfbe7f428532589cf3d0df5a0f2b83d14b3f4/design-flat-minimal-logo.jpg","https://fiverr-res.cloudinary.com/t_gig_cards_web,q_auto,f_auto/gigs/128213838/original/c9c7f19f2f2bdabea6ac869e8559f3d6e1838fed.jpg","https://fiverr-res.cloudinary.com/images/t_thumbnail3_3,q_auto,f_auto/gigs2/128213838/original/50a95d13a13af1b2f118728941175ce57fa4a623/design-flat-minimal-logo.jpg"],
+    "shortTitle": "Short Gig Title",
+    "shortDesc": "short Gig desc",
+    "deliveryTime": 2,
+    "revisionNumber": 4,
+    "features": ["3 concepts included","Logo transparency","Vector file","Printable file","Include 3D mockup","Include source file","Stationery designs","Include social media kit"],
+    "sales": 10
+
+}
+
+###
+GET http://localhost:8080/api/gigs/getAllGig
+###
+
+DELETE http://localhost:8080/api/gigs/deleteGig/65cf77134e68c788998817b6
+###
+GET http://localhost:8080/api/gigs/singleGig/65cf79fea0022b89713f460a
+
+###
+POST http://localhost:8080/api/reviews/createReview
+Content-Type: application/json
+
+{
+   "gigId" : "65d01ef996e5405caf539bb8",
+   "star" : 4,
+   "desc" : "I feel good bescause of this"
+}
+### 
+GET http://localhost:8080/api/reviews/65d02e4438963356320d0fda
+###
+POST http://localhost:8080/api/orders/createOrder/65d1ad97057c3f5c3cea6783
+Content-Type: application/json
+### 
+GET http://localhost:8080/api/orders/
+### 
+POST http://localhost:8080/api/conversations
+Content-Type: application/json
+
+{
+   "to" :  "65cf727cd788fee613acc30e"
+}
+
+###
+GET http://localhost:8080/api/conversations/
+###
+GET http://localhost:8080/api/messages/65cf727cd788fee613acc30e65d2fffb4e159e9fbde36b0a
+###
+POST http://localhost:8080/api/messages/
+Content-Type: application/json
+
+{
+
+  "conversationId": "65cf727cd788fee613acc30e65d2fffb4e159e9fbde36b0a",
+  "userId": "65cf727cd788fee613acc30e",
+  "desc":  "Hello im mack from usa"
+  
+}
+
+###
+POST  http://localhost:8080/api/auth/reset-password 
+Content-Type: application/json
+
+{
+   "email" :"giabaod345@gmail.com"   
+}
+
+###
+DELETE   http://localhost:8080/api/reviews/65de8cdb478baf38e0deb73a
+Content-Type: application/json
+
+{
+   "userId" :"65d2fffb4e159e9fbde36b0a"
+}
+###
+PUT http://localhost:8080/api/users/65ce1c1c4a258fa5dcbacf48
+Content-Type: application/json 
+
+{
+   "desc" : "CC"
+}

@@ -1,0 +1,69 @@
+.messages {
+    padding: 40px 0;
+    span,p,h1,h2,h3,input,button,tr,th,td,a {
+        font-family: 'Montserrat', sans-serif;
+    } 
+    a {
+        color: gray;
+        text-decoration: none;
+    }
+    table {
+        padding: 10px 0;
+        width: 100%;
+        tr {
+            height: 80px;
+            &.active {
+                background-color: #1dbf730f;
+                // &:nth-child(even) {
+                // }
+            }
+          
+        }
+        th {
+            text-align: left;
+            padding: 10px 0;
+            background-color: transparent !important;
+        }
+        td {
+            color: gray;
+            padding: 10px;
+            font-weight: 500;
+            .lucide-mail {
+                color: blue;
+            }
+            button {
+                background-color: #1dbf73;
+                color: white;
+                padding: 6px;
+                border-radius: 2px;
+                font-weight: 500;
+                cursor: pointer;
+                border: none;
+
+            }
+        }
+       
+    }
+    display: flex;
+    justify-content: center;
+    .title {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        button {
+            background-color: #1dbf73;
+            border: none;
+            padding: 10px;
+            font-weight: 500;
+            cursor: pointer;
+            color: white;
+            border-radius: 4px;
+        }
+    }
+    .container {
+        width: 1440px;
+    }
+    img {
+        width: 50px;
+    }
+}

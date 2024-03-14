@@ -1,0 +1,32 @@
+.skills {
+    .skill {
+        border-radius: 20px;
+        border: 1px solid lightgray;
+        padding: 10px 20px;
+        font-weight: 500;
+        position: relative;
+        cursor: pointer;
+        &:hover {
+            background-color: rgba(0,0,0,0.05);
+            .action {
+                opacity: 1;
+                transform: translateX(0px);
+            }
+        } 
+        .action {
+            display: flex;
+            border: 1px solid lightgray;
+            background-color: white;
+            position: absolute;
+            top: -1px;
+            border-radius: 20px;
+            left: -1px;
+            padding: 10px 8px;
+            opacity: 0;
+            transform: translateX(-10px);
+            transition: 0.2s all;
+            overflow: hidden;
+            
+        }
+    }
+}

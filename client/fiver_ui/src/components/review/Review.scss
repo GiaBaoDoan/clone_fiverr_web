@@ -1,0 +1,152 @@
+
+.reviews {
+    .review {
+        cursor: pointer;
+        &:hover {
+            .action {
+                opacity: 1;
+                
+            }
+        }
+        display: flex;
+        gap: 15px;
+            img {
+                width: 60px;
+                height: 60px;
+                border-radius: 100%;
+                padding: 20px 0;
+
+            }
+       .userId {
+        flex: 1;
+        display: flex;
+        gap: 10px;
+
+        flex-direction: column;
+        .cmt {
+            font-size: 20px;
+            font-weight: 500;
+            padding: 20px 0;
+        }
+        .info {
+            display: flex;
+            flex-direction: column;
+            padding: 0;
+            .username {
+                font-weight: 600;
+                text-transform: capitalize;
+            }
+            .country {
+                display: flex;
+                gap: 10px;
+                align-items: center;
+            }
+            img {
+                width: 30px;
+                height: 30px;
+                object-fit: cover;
+            }
+        }
+        .star {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            span {
+                font-weight: 500;
+            }
+            svg {
+                width: 20px;
+                height: 20px;
+            }
+        }
+        .bot {
+            display: flex;
+            align-items: center;
+            .helpful {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                flex: 1;
+                span {
+                    font-weight: 500;
+                }
+                img {
+                    width: 20px !important;
+                    height: 20px !important;
+                }
+            }
+            .reply {
+                display: flex;
+                align-items: center;
+                gap: 5px;
+                font-weight: 600;
+            }
+        }
+        .reply-comment {
+            padding: 25px 0;
+            .owner {
+                display: flex;
+                align-items: center;
+                gap: 20px;
+                span {
+                    font-size: 18px;
+                    font-weight: 700;
+                }
+                img {
+                    width: 40px;
+                    height: 40px;
+                }
+            }
+            p{
+                margin-left: 60px;
+                font-size: 18px;
+                font-weight: 500;
+            }
+        }
+        .reply-input {
+            padding-top: 50px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            div {
+                border-bottom: 1px solid black;
+                display: flex;
+                input {
+                    padding: 10px;
+                    font-weight: 500;
+                    width: 100%;
+                    outline: none;
+                    border: none;
+                    font-size: 16px;
+                }
+                button {
+                   color: #000000;
+                   background-color: transparent;
+                   border: none;
+                   cursor: pointer;
+                }
+            }
+          
+            
+        }
+       }
+       .action {
+        opacity: 0;
+        display: flex;
+        gap: 20px;
+        .trash,.edit {
+            cursor: pointer;
+             transition: 0.3s all;
+         }
+         .trash {
+            color: red;
+         }
+       }
+       .text-desc {
+        text-decoration: underline;
+        margin-left: 10px;
+       }
+       
+       
+    }
+}

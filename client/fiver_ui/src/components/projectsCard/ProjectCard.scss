@@ -1,0 +1,43 @@
+a {
+    .card {
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+        padding: 10px;
+        img {
+            height: 237px;
+            object-fit: cover;
+            border-radius: 4px 4px 0 0;
+        }
+        .info {
+            background-color: white;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-radius: 0 0 4px 4px;
+            box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+            padding: 20px;
+            div {
+                display: flex;
+                flex-direction: column;
+                .cat {
+                    color: black;
+                    font-weight: 500;
+                }
+                .auth {
+                    color: gray;
+                    font-weight: 500;
+                }
+               
+            }
+            .avatar {
+                border-radius: 100%;
+                width: 50px;
+                height: 50px;
+                object-fit: cover;
+            }
+    
+        }
+        
+    }
+}

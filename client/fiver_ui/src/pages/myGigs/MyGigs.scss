@@ -1,0 +1,51 @@
+.myGigs {
+    padding: 40px 0;
+    span,p,h1,h2,h3,input,button,tr,th,td {
+        font-family: 'Montserrat', sans-serif;
+    } 
+    table {
+        padding: 10px 0;
+        width: 100%;
+        tr {
+            height: 50px;
+            &:nth-child(even) {
+                background-color: #1dbf730f;
+              }
+        }
+        th {
+            text-align: left;
+            padding: 10px 0;
+            background-color: transparent !important;
+        }
+        td {
+            padding: 5px;
+            font-weight: 500;
+            .lucide-trash-2 {
+                color: red;
+            }
+        }
+       
+    }
+    display: flex;
+    justify-content: center;
+    .title {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        button {
+            background-color: #1dbf73;
+            border: none;
+            padding: 10px;
+            font-weight: 500;
+            cursor: pointer;
+            color: white;
+            border-radius: 4px;
+        }
+    }
+    .container {
+        width: 1440px;
+    }
+    img {
+        width: 50px;
+    }
+}
