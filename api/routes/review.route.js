@@ -7,6 +7,7 @@ import {
   editComment,
   getReviews,
   replyComment,
+  searchInput,
 } from "../controller/review.controller.js";
 import { verifyToken } from "../middelware/jwt.js";
 const router = express.Router();
@@ -16,6 +17,7 @@ router.post("/dislike/:gigId/:userId", verifyToken, dislike);
 router.post("/reply/:gigId/:userId", verifyToken, replyComment);
 router.post("/update/:gigId/:userId", verifyToken, editComment);
 router.get("/:id", getReviews);
+router.post("/searchReviews", searchInput);
 router.delete("/:gigId/:userId", verifyToken, deleteReview);
 
 export default router;

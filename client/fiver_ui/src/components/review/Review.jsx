@@ -151,7 +151,7 @@ const Review = ({ item, owner, setEdit, editCmt, handleEditComment }) => {
                   width="16"
                   height="16"
                   fill={`${
-                    item.likes.includes(getCurrentUser()._id) ? "#1dbf73" : ""
+                    item.likes.includes(getCurrentUser()?._id) ? "#1dbf73" : ""
                   }`}
                   viewBox="0 0 16 16"
                   xmlns="http://www.w3.org/2000/svg"
@@ -161,7 +161,9 @@ const Review = ({ item, owner, setEdit, editCmt, handleEditComment }) => {
                 <span
                   style={{
                     color: `${
-                      item.likes.includes(getCurrentUser()._id) ? "#1dbf73" : ""
+                      item.likes.includes(getCurrentUser()?._id)
+                        ? "#1dbf73"
+                        : ""
                     } `,
                   }}
                 >
@@ -176,7 +178,7 @@ const Review = ({ item, owner, setEdit, editCmt, handleEditComment }) => {
                   width="16"
                   height="16"
                   fill={`${
-                    item.dislike.includes(getCurrentUser()._id) ? "red" : ""
+                    item.dislike.includes(getCurrentUser()?._id) ? "red" : ""
                   }`}
                   viewBox="0 0 16 16"
                   xmlns="http://www.w3.org/2000/svg"
@@ -186,7 +188,7 @@ const Review = ({ item, owner, setEdit, editCmt, handleEditComment }) => {
                 <span
                   style={{
                     color: `${
-                      item.dislike.includes(getCurrentUser()._id) ? "red" : ""
+                      item.dislike.includes(getCurrentUser()?._id) ? "red" : ""
                     } `,
                   }}
                 >
@@ -194,7 +196,7 @@ const Review = ({ item, owner, setEdit, editCmt, handleEditComment }) => {
                 </span>
               </div>
               <span style={{ marginLeft: "10px", color: "gray" }}>
-                {item.likes.includes(getCurrentUser()._id) &&
+                {item.likes.includes(getCurrentUser()?._id) &&
                   "You found this review helpful"}
               </span>
             </div>

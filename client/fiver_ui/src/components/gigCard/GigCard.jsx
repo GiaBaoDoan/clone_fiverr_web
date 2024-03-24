@@ -33,7 +33,7 @@ export const GigCard = ({ item }) => {
   return (
     <Link
       style={{ textDecoration: "none" }}
-      to={`/gig/${item._id}`}
+      to={`/gig/${item?._id}`}
       className="wrap-gig"
     >
       <div className="link">
@@ -88,7 +88,7 @@ export const GigCard = ({ item }) => {
       <div
         className="heart"
         onClick={() => {
-          saveLoveList.mutate(item._id);
+          saveLoveList.mutate(item?._id);
         }}
       >
         <svg
@@ -96,14 +96,14 @@ export const GigCard = ({ item }) => {
           width="26"
           height="26"
           color={`${
-            item.loveSave.indexOf(currentUser._id) !== -1
+            item.loveSave.indexOf(currentUser?._id) !== -1
               ? "rgb(255, 58, 58)"
               : "white"
           }`}
           viewBox="0 0 24 24"
           stroke="currentColor"
           fill={`${
-            item.loveSave.indexOf(currentUser._id) !== -1
+            item.loveSave.indexOf(currentUser?._id) !== -1
               ? "rgb(255, 58, 58)"
               : "rgba(0,0,0,0.3)"
           }`}

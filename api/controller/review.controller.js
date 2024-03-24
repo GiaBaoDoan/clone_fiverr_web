@@ -157,3 +157,4 @@ export const editComment = async (req, res, next) => {
     next(err);
   }
 };
+export const searchInput = async (req, res, next) => {};

@@ -14,6 +14,7 @@ const Reviews = ({ owner, gigId }) => {
   const handleEditComment = () => {
     commentRef.current?.scrollIntoView({ behavior: "smooth" });
   };
+  const searchInput = useRef();
   const { id } = useParams();
   const [moreReview, seeMore] = useState(2);
   const [editCmt, setEdit] = useState({
@@ -63,8 +64,11 @@ const Reviews = ({ owner, gigId }) => {
       </div>
       {reviews?.length > 0 && (
         <div className="search-reviews">
-          <input type="text" placeholder="Search Reviews" />
-          <span>
+          <input ref={searchInput} type="text" placeholder="Search Reviews" />
+          <span
+            onClick={() => console.log(searchInput.current.value)}
+            style={{ cursor: "pointer" }}
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="20"
@@ -83,7 +87,6 @@ const Reviews = ({ owner, gigId }) => {
           </span>
         </div>
       )}
-
       {reviewLoading ? (
         <Loading />
       ) : (

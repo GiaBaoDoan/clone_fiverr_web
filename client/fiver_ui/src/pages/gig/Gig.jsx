@@ -77,14 +77,14 @@ const Gig = () => {
     if (!currentUser) {
       return toast.error("You must signin frist !! ");
     }
-    const id = user._id + currentUser._id;
+    const id = user?._id + currentUser?._id;
     try {
       const res = await newRequest.get(`/conversations/single/${id}`);
       navigate(`/message/${res.data.id}`);
     } catch (err) {
       if (err.response.status === 404) {
         const res = await newRequest.post(`/conversations/`, {
-          to: currentUser.isSeller ? currentUser._id : user._id,
+          to: currentUser.isSeller ? currentUser?._id : user?._id,
         });
         navigate(`/message/${res.data.id}`);
       }
@@ -411,12 +411,12 @@ const Gig = () => {
                         width="28"
                         height="28"
                         color={`${
-                          gig?.loveSave.indexOf(currentUser._id) !== -1
+                          gig?.loveSave.indexOf(currentUser?._id) !== -1
                             ? "rgba(255, 58, 58,1)"
                             : "white"
                         }`}
                         fill={`${
-                          gig?.loveSave.indexOf(currentUser._id) !== -1
+                          gig?.loveSave.indexOf(currentUser?._id) !== -1
                             ? "rgba(255, 58, 58,1)"
                             : "rgba(0,0,0,0.3)"
                         }`}
