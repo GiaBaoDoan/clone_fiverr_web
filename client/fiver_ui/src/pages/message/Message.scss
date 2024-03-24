@@ -1,11 +1,22 @@
 .message {
     padding: 50px 0;
     justify-content: center;
-    span,a,textarea,button,p {
+    span,a,textarea,button,p,input {
         font-family: 'Montserrat', sans-serif;
     }
     a {
         text-decoration: none;
+    }
+    input {
+        padding: 14px 25px;
+        border-radius: 10px;
+        font-size: 16px;
+    }
+    .readMessage,.star {
+       stroke-width: 1;
+        &:hover {
+            fill: #000000;
+        }
     }
     .container {
         .breadcrumbs {

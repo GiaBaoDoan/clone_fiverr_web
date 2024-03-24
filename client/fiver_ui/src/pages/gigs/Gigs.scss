@@ -1,5 +1,5 @@
 .gigs {
-    span,p,h1,input,button,select,option,label {
+    span,p,h1,h2,input,button,select,option,label {
         font-family: 'Montserrat', sans-serif;
     }
     display: flex;
@@ -70,12 +70,12 @@
                 }
                 button {
                     color: white;
-                    font-weight: 500;
+                    font-weight: 600;
                     cursor: pointer;
                     border: none;
-                    padding: 5px 10px;
+                    padding: 5px 15px;
                     border-radius: 4px;
-                    background-color: #1DBF73;
+                    background-color: #000000;
                 }
             }
         }

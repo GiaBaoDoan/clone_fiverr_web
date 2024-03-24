@@ -2,12 +2,20 @@ import Conversation from "../models/conversation.model.js";
 import { createError } from "../untils/createError.js";
 
 export const getConversations = async (req, res, next) => {
-  const conversations = await Conversation.find({
-    ...(req.payload.isSeller
-      ? { sellerId: req.payload.id }
-      : { buyerId: req.payload.id }),
-  }).sort({ updatedAt: -1 });
-  return res.status(200).send(conversations);
+  try {
+    const conversations = await Conversation.find({
+      ...(req.payload.isSeller
+        ? {
+            sellerId: req.payload.id,
+          }
+        : {
+            buyerId: req.payload.id,
+          }),
+    }).sort({ updatedAt: -1 });
+    return res.status(200).send(conversations);
+  } catch (err) {
+    next(err);
+  }
 };
 export const createConversation = async (req, res, next) => {
   const newConversation = new Conversation({
@@ -23,6 +31,24 @@ export const createConversation = async (req, res, next) => {
   return res.status(201).send(saveConversation);
 };
 export const updateConversation = async (req, res, next) => {
+  try {
+    const updatedConversations = await Conversation.findOneAndUpdate(
+      { id: req.params.id },
+      {
+        $set: {
+          ...(req.payload.isSeller
+            ? { readBySeller: true }
+            : { readByBuyer: true }),
+        },
+      },
+      { new: true, timestamps: false }
+    );
+    return res.status(200).send(updatedConversations);
+  } catch (err) {
+    next(err);
+  }
+};
+export const makeRead = async (req, res, next) => {
   try {
     const item = await Conversation.findOne({ id: req.params.id });
     const updatedConversations = await Conversation.findOneAndUpdate(
@@ -46,6 +72,27 @@ export const getSingleConversation = async (req, res, next) => {
     const conversations = await Conversation.findOne({ id: req.params.id });
     if (!conversations) return next(createError(404, "conversation not found"));
     return res.status(200).send(conversations);
+  } catch (err) {
+    next(err);
+  }
+};
+export const ratingStar = async (req, res, next) => {
+  try {
+    const item = await Conversation.findOne({
+      id: req.params.id,
+    });
+    const update = await Conversation.findOneAndUpdate(
+      {
+        id: req.params.id,
+      },
+      {
+        $set: {
+          ratingStar: !item.ratingStar,
+        },
+      },
+      { new: true, timestamps: false }
+    );
+    return res.status(200).send(update);
   } catch (err) {
     next(err);
   }

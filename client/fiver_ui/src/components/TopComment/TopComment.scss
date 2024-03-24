@@ -1,0 +1,96 @@
+.topComment {
+    width: 800px;
+   .top-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 50px;
+    .see-all {
+        font-weight: 600;
+        cursor: pointer;
+        font-size: 18px;
+    }
+}
+.content {
+    padding: 50px 0;
+    .slick-slider {
+        background-color: transparent !important;
+        .slick-slide {
+            display: flex !important;
+            justify-content: center;
+            align-items: center;          
+        }
+    }
+    .comments {
+        flex:1;
+        width: 750px !important;
+        border: 1px solid rgb(227, 224, 224);
+        padding: 20px;
+        border-radius: 4px;
+        gap: 20px;
+        display: flex !important;
+        .left-reviews {
+            img {
+                width: 50px;
+                height: 50px;
+                border-radius: 100%;
+                object-fit: cover;
+            }
+        }
+        .nation {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .right-reviews {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            .countryName {
+                font-weight: 500;
+                border-right: 1px solid lightgray;
+                padding-right: 10px;
+            }
+            .flag {
+                width: 30px;
+                height: 20px;
+                object-fit: cover;
+            }
+            .right-top {
+                display: flex;
+                align-items: center;
+                gap: 15px;
+                .star {
+                    display: flex;
+                    align-items: center;
+                    font-weight: 600;
+                    gap: 3px;
+                    .numStar {
+                        margin-left: 7px;
+                    }
+                    svg {
+                        width: 18px;
+                        height: 18px;
+
+                    }
+                }
+                .username {
+                    font-weight: 600;
+                    font-size: 18px;
+                }
+            }
+            .desc{
+                padding: 0;
+                font-size: 18px;
+                font-weight: 500;
+            }
+            .time {
+                color: #62646a;
+                font-weight: 500;
+            }
+    
+        }
+        
+    }
+}
+}

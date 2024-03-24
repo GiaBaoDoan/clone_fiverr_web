@@ -1,5 +1,4 @@
 import User from "../models/user.models.js";
-import { createError } from "../untils/createError.js";
 export const deleteUser = async (req, res, next) => {
   const user = await User.findById(req.params.id);
   if (req.payload.id !== user.id) {
@@ -78,7 +77,6 @@ export const addMoreInfor = async (req, res, next) => {
 };
 
 export const deletedLan = async (req, res, next) => {
-  //  find id in lan update or delete
   try {
     const user = await User.findById(req.payload.id);
     const lans = [...user.languages];
@@ -119,6 +117,36 @@ export const deletedSkill = async (req, res, next) => {
       }
     );
     return res.status(200).send(update);
+  } catch (err) {
+    next(err);
+  }
+};
+export const saveLoveList = async (req, res, next) => {
+  try {
+    const user = await User.findById(req.payload.id);
+    const newLoveList = [...user?.myLoveList];
+    const index = newLoveList.findIndex((item) => item === req.params.id);
+    if (index === -1) {
+      newLoveList.push(req.params.id);
+    } else {
+      newLoveList.splice(index, 1);
+    }
+    const newUser = User.findOneAndUpdate(
+      {
+        _id: req.payload.id,
+      },
+
+      {
+        $set: {
+          myLoveList: newLoveList,
+        },
+      },
+      {
+        new: true,
+        timestamps: false,
+      }
+    );
+    return res.status(200).send(newUser);
   } catch (err) {
     next(err);
   }

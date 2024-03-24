@@ -7,7 +7,6 @@ import newRequest from "../../utils/newRequest";
 import { toast } from "react-toastify";
 import moment from "moment";
 import AddLans from "../../components/addLan/AddLans";
-import { GigCard } from "../../components/gigCard/GigCard";
 const Profile = () => {
   const queryClient = useQueryClient();
   const currentUser = getCurrentUser();
@@ -172,12 +171,7 @@ const Profile = () => {
             <AddSkill openThirBox={openThirBox} thirBox={thirBox} />
           </div>
         </div>
-        <div className="right">
-          <h2>My Order</h2>
-          {data?.map((item) => {
-            return <GigCard item={item} />;
-          })}
-        </div>
+        <div className="right"></div>
       </div>
     </div>
   );

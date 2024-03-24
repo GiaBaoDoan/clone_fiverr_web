@@ -6,6 +6,7 @@ export const createReview = async (req, res, next) => {
   if (req.payload.isSeller) {
     return res.status(403).send("Sellers can't create review");
   }
+  console.log(req.body);
   const newReview = new Review({
     userId: req.payload.id,
     gigId: req.body.gigId,

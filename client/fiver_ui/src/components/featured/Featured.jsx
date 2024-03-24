@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import "./Featured.scss";
 import { useNavigate } from "react-router-dom";
-import Navbar from "../../pages/navbar/Navbar";
 const Featured = () => {
   const navigate = useNavigate();
   const input = useRef();
@@ -38,8 +37,28 @@ const Featured = () => {
           </h1>
           <form onSubmit={handelSubmit}>
             <img className="search" src="./img/search.png" alt="" />
-            <input ref={input} placeholder="Try to build app*" type="text" />
-            <button>Search</button>
+            <input
+              ref={input}
+              placeholder="What are you looking for today ?"
+              type="text"
+            />
+            <button>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="lucide lucide-search"
+              >
+                <circle cx="11" cy="11" r="8" />
+                <path d="m21 21-4.3-4.3" />
+              </svg>
+            </button>
           </form>
           <div className="categories">
             <span>Popular:</span>

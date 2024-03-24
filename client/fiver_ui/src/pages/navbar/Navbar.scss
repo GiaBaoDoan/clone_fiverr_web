@@ -1,10 +1,32 @@
 .navbar  {
     position: absolute;
-    span,a,p,::placeholder,input{
+    span,a,p,::placeholder,input,h3{
         cursor: pointer;
         font-family: 'Montserrat', sans-serif;
+    }  
+    .Notification {
+            .item-no {
+                width: 30px;
+                height: 30px;
+                padding: 4px;
+                display: flex;
+                justify-content: center;
+                align-items:center ;
+                border-radius: 100%;
+                &:hover {   
+                    background-color: rgba(0, 0, 0, 0.05);
+                }
+                .not {
+                    position: absolute;
+                    width: 5px;
+                    height: 5px;
+                    top: 5px;
+                    right: 5px;
+                    background-color: rgb(255, 97, 97);
+                    border-radius: 100%;
+                }
+            }
     }
-   
     a {
         text-decoration: none;
     }
@@ -95,7 +117,6 @@
         align-items: center;
        
         padding :20px 0;
-      
         .logo {
             font-size: 34px;
             font-weight: 600;

@@ -57,7 +57,7 @@
         position: sticky;
         background-color: white;    
         padding: 10px;
-        width: 380px;
+        width: 340px;
         justify-content: flex-start;
         border-radius: 9999px;
         align-items: center;
@@ -75,7 +75,7 @@
             gap: 20px;
             p {
                 &:first-child {
-                    font-size: 20px;
+                    font-size: 17px;
                     font-weight: 600;
                     color: #404145;
                 }
@@ -98,17 +98,17 @@
         .img {
             position: relative;
             img {
-                width: 60px;
-                height: 60px;
+                width: 50px;
+                height: 50px;
                 border-radius: 100%;
             }
             .dot {
                 position: absolute;
                 background-color: #1dbf73;
-                width: 18px;
-                height: 18px;
-                right: -3px;
-                bottom: 5px;
+                width: 15px;
+                height: 15px;
+                right: -1px;
+                bottom: 6px;
                 border-radius: 100%;
             }
 
@@ -328,7 +328,7 @@
                    margin: 10px 0 ;
                 }
                 .items {
-                    gap: 20px;
+                    gap: 25px;
                     display: grid;
                     grid-template-columns: 1fr 1fr;
                     .item {
@@ -356,6 +356,26 @@
             .right-content {  
                 flex: 1;
                 .wrap {
+                    .heart {
+                        padding: 10px 0;
+                        gap: 14px;
+                        div {
+                            display: flex;
+                            align-items: center;
+                            .small-box {
+                                border: 1px solid #dadbdd;
+                                padding: 4px 10px;
+                                border-radius: 3px;
+                            }
+                        }
+                        .share {
+                            border: 1px solid #dadbdd;  
+                            padding: 4px 14px;
+                            border-radius: 4px;
+                           
+                        }
+                        
+                    }
                     position: sticky;
                     top: 150px;
                     .Tabs {

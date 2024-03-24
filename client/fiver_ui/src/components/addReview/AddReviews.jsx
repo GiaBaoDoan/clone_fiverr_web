@@ -4,8 +4,9 @@ import "./AddReview.scss";
 import newRequest from "../../utils/newRequest";
 import { getCurrentUser } from "../getCurrentUser/getCurrentUser";
 import { toast } from "react-toastify";
+import { useParams } from "react-router-dom";
 
-const AddReviews = ({ gigId, editCmt, setEdit }) => {
+const AddReviews = ({ editCmt, setEdit, gigId }) => {
   const queryClient = useQueryClient();
   const currentUser = getCurrentUser();
   const postComment = useMutation({
@@ -13,18 +14,17 @@ const AddReviews = ({ gigId, editCmt, setEdit }) => {
       return newRequest.post("/reviews/createReview", review);
     },
     onSuccess: () => {
+      toast("Update successfully !!");
       queryClient.invalidateQueries(["reviews"]);
     },
     onError: (err) => {
       toast.error(err.response.data);
     },
   });
+  const { id } = useParams();
   const updateComment = useMutation({
     mutationFn: (review) => {
-      return newRequest.post(
-        `/reviews/update/${gigId}/${editCmt.userId}`,
-        review
-      );
+      return newRequest.post(`/reviews/update/${id}/${editCmt.userId}`, review);
     },
     onSuccess: (res) => {
       queryClient.invalidateQueries(["reviews"]);
@@ -43,10 +43,9 @@ const AddReviews = ({ gigId, editCmt, setEdit }) => {
     },
   });
   const handleSubmit = (e) => {
+    e.preventDefault();
     const desc = e.target[0].value;
     const star = e.target[1].value;
-    console.log(desc, star, gigId);
-    e.preventDefault();
     if (!currentUser) {
       return toast.error("Please sign in before reviews this product");
     }

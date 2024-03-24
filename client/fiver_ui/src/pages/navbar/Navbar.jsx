@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import "./Navbar.scss";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import Icon from "../../components/icon/Icon";
@@ -8,10 +8,12 @@ import { Context } from "../../context/Context";
 import { getCurrentUser } from "../../components/getCurrentUser/getCurrentUser";
 import axios from "axios";
 import moment from "moment";
+import OpenLoveList from "../../components/openLoveList/OpenLoveList";
 const Navbar = () => {
-  const { becomeSeller, openAuth, inbox, openInbox } = useContext(Context);
+  const { openAuth, inbox, openInbox } = useContext(Context);
   const [data, setData] = useState([]);
   const navigate = useNavigate();
+  const search = useRef();
   const [active, setActive] = useState(false);
   const [open, setOpen] = useState(false);
   const { pathname } = useLocation();
@@ -46,6 +48,22 @@ const Navbar = () => {
       return newRequest.put(`/conversations/${id}`);
     },
     onSuccess: () => {
+      fetchALlConversation();
+      queryClient.invalidateQueries(["conversations"]);
+    },
+  });
+  const filter = () => {
+    const repInbox = conversation?.filter((item) =>
+      currentUser?.isSeller ? !item?.readBySeller : !item?.readByBuyer
+    );
+    return repInbox?.length;
+  };
+  const markRead = useMutation({
+    mutationFn: (id) => {
+      return newRequest.put(`/conversations/makeRead/${id}`);
+    },
+    onSuccess: () => {
+      fetchALlConversation();
       queryClient.invalidateQueries(["conversations"]);
     },
   });
@@ -53,7 +71,8 @@ const Navbar = () => {
   useEffect(() => {
     getUser();
   }, [conversation]);
-  const { refetch, isLoading } = useQuery({
+
+  const { refetch } = useQuery({
     queryKey: ["logout"],
     queryFn: () => {
       newRequest.post("/auth/logout");
@@ -71,43 +90,52 @@ const Navbar = () => {
           </Link>
           <span className="dot">.</span>
         </div>
-        <div className="search">
-          <input
-            type="text"
-            placeholder="What service are you looking for today ?"
-          />
-          <button>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              color="white"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              class="lucide lucide-search"
-            >
-              <circle cx="11" cy="11" r="8" />
-              <path d="m21 21-4.3-4.3" />
-            </svg>
-          </button>
-        </div>
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            navigate(`/gigs/?search=${search.current.value}`);
+          }}
+          action=""
+          style={{ flex: "1" }}
+        >
+          <div className="search">
+            <input
+              ref={search}
+              type="text"
+              placeholder="What service are you looking for today ?"
+            />
+            <button>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                color="white"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="lucide lucide-search"
+              >
+                <circle cx="11" cy="11" r="8" />
+                <path d="m21 21-4.3-4.3" />
+              </svg>
+            </button>
+          </div>
+        </form>
         <div className="links">
           <span>Fiverr Bussiness </span>
           <span>Explore</span>
           <span>English</span>
           {!currentUser && <span onClick={() => openAuth(true)}>Sign in</span>}
-          {!currentUser?.isSeller && (
-            <span className="becomeSeller" onClick={() => becomeSeller(true)}>
-              Become seller
-            </span>
-          )}
           {currentUser && (
-            <div style={{ display: "flex", gap: "15px" }}>
-              <span>
+            <div
+              className="
+            Notification"
+              style={{ display: "flex" }}
+            >
+              <span className="item-no">
                 <svg
                   width="20"
                   height="20"
@@ -119,11 +147,12 @@ const Navbar = () => {
                 </svg>
               </span>
               <span
-                className="openInbox"
+                className="openInbox item-no"
                 onClick={() => {
                   fetchALlConversation();
                 }}
               >
+                {filter() > 0 && <div className="not"></div>}
                 <svg
                   onClick={() => openInbox(!inbox)}
                   width="20"
@@ -170,7 +199,9 @@ const Navbar = () => {
                           d="M2.5 2.25a.25.25 0 0 0-.25.25v11c0 .138.112.25.25.25h13a.25.25 0 0 0 .25-.25v-11a.25.25 0 0 0-.25-.25h-13ZM.75 2.5c0-.966.784-1.75 1.75-1.75h13c.966 0 1.75.784 1.75 1.75v11a1.75 1.75 0 0 1-1.75 1.75h-13A1.75 1.75 0 0 1 .75 13.5v-11Z"
                         ></path>
                       </svg>
-                      <span>Inbox(1)</span>
+                      <span style={{ fontWeight: "600", color: "#000000" }}>
+                        Inbox ({filter()})
+                      </span>
                     </span>
                     <div
                       className="conversation"
@@ -195,7 +226,11 @@ const Navbar = () => {
                           >
                             <div
                               onClick={() => {
+                                mutationConversation.mutate(
+                                  conversation[index].id
+                                );
                                 navigate(`/message/${conversation[index].id}`);
+                                openInbox(false);
                               }}
                             >
                               <div
@@ -223,25 +258,37 @@ const Navbar = () => {
                                   }}
                                 >
                                   <p
-                                    className=""
                                     style={{
                                       fontWeight: "600",
-                                      color: "#212121",
+                                      color: "#000000",
                                     }}
                                   >
                                     {item.data.username}
                                   </p>
-                                  <p>
+                                  <p
+                                    style={{
+                                      color: "#000000",
+                                      fontWeight: `${
+                                        (currentUser.isSeller &&
+                                          !conversation[index]?.readBySeller) ||
+                                        (!currentUser.isSeller &&
+                                          !conversation[index]?.readByBuyer)
+                                          ? "600"
+                                          : "400"
+                                      }`,
+                                    }}
+                                  >
                                     {conversation[index]?.userId ===
                                     currentUser?._id
                                       ? "Me: "
                                       : ""}{" "}
-                                    {conversation[index].lastMessage.length > 20
-                                      ? conversation[index].lastMessage.slice(
+                                    {conversation[index]?.lastMessage?.length >
+                                    20
+                                      ? conversation[index]?.lastMessage.slice(
                                           0,
                                           20
                                         ) + "..."
-                                      : conversation[index].lastMessage}
+                                      : conversation[index]?.lastMessage}
                                   </p>
                                   <p
                                     style={{
@@ -263,53 +310,58 @@ const Navbar = () => {
                                 !conversation[index].readBySeller) ||
                               (!currentUser.isSeller &&
                                 !conversation[index].readByBuyer) ? (
-                                <svg
+                                <small
                                   onClick={() =>
-                                    mutationConversation.mutate(
-                                      conversation[index].id
-                                    )
+                                    markRead.mutate(conversation[index]?.id)
                                   }
-                                  xmlns="http://www.w3.org/2000/svg"
-                                  width="20"
-                                  height="20"
-                                  viewBox="0 0 24 24"
-                                  fill="none"
-                                  stroke="currentColor"
-                                  stroke-width="1.2"
-                                  stroke-linecap="round"
-                                  stroke-linejoin="round"
-                                  class="lucide lucide-mail"
                                 >
-                                  <rect
+                                  <svg
+                                    xmlns="http://www.w3.org/2000/svg"
                                     width="20"
-                                    height="16"
-                                    x="2"
-                                    y="4"
-                                    rx="2"
-                                  />
-                                  <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
-                                </svg>
+                                    height="20"
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    stroke-width="1.2"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    class="lucide lucide-mail"
+                                  >
+                                    <rect
+                                      width="20"
+                                      height="16"
+                                      x="2"
+                                      y="4"
+                                      rx="2"
+                                    />
+                                    <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+                                  </svg>
+                                </small>
                               ) : (
-                                <svg
+                                <small
                                   onClick={() =>
-                                    mutationConversation.mutate(
-                                      conversation[index].id
-                                    )
+                                    markRead.mutate(conversation[index]?.id)
                                   }
-                                  xmlns="http://www.w3.org/2000/svg"
-                                  width="20"
-                                  height="20"
-                                  viewBox="0 0 24 24"
-                                  fill="none"
-                                  stroke="currentColor"
-                                  stroke-width="1.2"
-                                  stroke-linecap="round"
-                                  stroke-linejoin="round"
-                                  class="lucide lucide-mail-open"
                                 >
-                                  <path d="M21.2 8.4c.5.38.8.97.8 1.6v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V10a2 2 0 0 1 .8-1.6l8-6a2 2 0 0 1 2.4 0l8 6Z" />
-                                  <path d="m22 10-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 10" />
-                                </svg>
+                                  <svg
+                                    onClick={() =>
+                                      markRead.mutate(conversation[index]?.id)
+                                    }
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    width="20"
+                                    height="20"
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    stroke-width="1.2"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    class="lucide lucide-mail-open"
+                                  >
+                                    <path d="M21.2 8.4c.5.38.8.97.8 1.6v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V10a2 2 0 0 1 .8-1.6l8-6a2 2 0 0 1 2.4 0l8 6Z" />
+                                    <path d="m22 10-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 10" />
+                                  </svg>
+                                </small>
                               )}
                             </div>
                           </div>
@@ -355,21 +407,10 @@ const Navbar = () => {
                   </div>
                 )}
               </span>
-              <span>
-                <svg
-                  width="20"
-                  height="20"
-                  viewBox="0 0 16 16"
-                  fill="#74767e"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path d="M14.325 2.00937C12.5188 0.490623 9.72813 0.718748 8 2.47812C6.27188 0.718748 3.48125 0.487498 1.675 2.00937C-0.674996 3.9875 -0.331246 7.2125 1.34375 8.92187L6.825 14.5062C7.1375 14.825 7.55625 15.0031 8 15.0031C8.44688 15.0031 8.8625 14.8281 9.175 14.5094L14.6563 8.925C16.3281 7.21562 16.6781 3.99062 14.325 2.00937ZM13.5875 7.86875L8.10625 13.4531C8.03125 13.5281 7.96875 13.5281 7.89375 13.4531L2.4125 7.86875C1.27188 6.70625 1.04063 4.50625 2.64063 3.15937C3.85625 2.1375 5.73125 2.29062 6.90625 3.4875L8 4.60312L9.09375 3.4875C10.275 2.28437 12.15 2.1375 13.3594 3.15625C14.9563 4.50312 14.7188 6.71562 13.5875 7.86875Z"></path>
-                </svg>
-              </span>
+              <OpenLoveList />
             </div>
           )}
-
-          {/* {currentUser?.isSeller && <button className="Join">Join</button>} */}
+          {!currentUser?.isSeller && <span className="orders">Orders</span>}
           {currentUser && (
             <div
               className="user"
@@ -394,8 +435,6 @@ const Navbar = () => {
                     <Link to={"/add"}>Add new Gig</Link>
                   </>
                   <Link to={"/orders"}>Orders</Link>
-                  <Link to={"/messages"}>Messages</Link>
-
                   <a onClick={() => refetch()}>Logout</a>
                 </div>
               )}

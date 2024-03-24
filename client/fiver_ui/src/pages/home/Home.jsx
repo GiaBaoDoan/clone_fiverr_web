@@ -107,7 +107,7 @@ const Home = () => {
           </div>
           <div className="item">
             <video
-              src="https://www.youtube.com/watch?v=EfIlH3x42vk&list=RDH0ym38OMkxA&index=4"
+              src={"https://www.youtube.com/watch?v=Dz07CYM72us"}
               controls
             />
           </div>

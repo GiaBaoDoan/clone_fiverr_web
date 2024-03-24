@@ -49,6 +49,10 @@ const userSchema = new Schema(
       type: Boolean,
       default: false,
     },
+    myLoveList: {
+      type: [String],
+      require: false,
+    },
   },
   {
     timestamps: true,

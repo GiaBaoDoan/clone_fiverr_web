@@ -17,7 +17,7 @@ const Review = ({ item, owner, setEdit, editCmt, handleEditComment }) => {
     return setSeemore(!seemore);
   };
   const { id } = useParams();
-  const { data: userReview, reviewLoading } = useQuery({
+  const { data: userReview } = useQuery({
     queryKey: [item.userId],
     queryFn: () =>
       newRequest.get(`/users/${item?.userId}`).then((res) => res.data),

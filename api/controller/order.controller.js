@@ -11,7 +11,6 @@ export const createOrder = async (req, res, next) => {
 };
 
 export const getAllOrder = async (req, res, next) => {
-  console.log(req.payload.id);
   try {
     const orders = await Order.find({
       ...(req.payload.isSeller
@@ -19,7 +18,6 @@ export const getAllOrder = async (req, res, next) => {
         : { buyerId: req.payload.id }),
       isCompleted: true,
     });
-    console.log(orders);
     return res.status(200).send(orders);
   } catch (err) {
     next(err);

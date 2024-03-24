@@ -11,7 +11,7 @@ export const getAllGig = async (req, res, next) => {
     }),
     ...(q.search && { title: { $regex: q.search, $options: "i" } }),
   };
-  const gigs = await Gig.find(filters).sort({ price: -1 });
+  const gigs = await Gig.find(filters).sort({ [q.sort]: -1 });
   return res.status(200).send(gigs);
 };
 export const createGig = async (req, res, next) => {
@@ -46,4 +46,55 @@ export const myGig = async (req, res, next) => {
   const gig = await Gig.find({ userId: req.params.id });
   if (!gig) return next(createError(400, "Gig not found !!"));
   return res.status(200).send(gig);
+};
+export const saveLoveList = async (req, res, next) => {
+  try {
+    const item = await Gig.findOne({ _id: req.params.id });
+    const user = await User.findOne({ _id: req.body.userId });
+    const userLoveList = [...user.myLoveList];
+    const newLoveList = [...item.loveSave];
+    const gigIndex = newLoveList.findIndex((item) => item === req.body.userId);
+    const userIndex = userLoveList.findIndex((item) => item === req.params.id);
+    if (gigIndex === -1) {
+      newLoveList.push(req.body.userId);
+    } else {
+      newLoveList.splice(gigIndex, 1);
+    }
+    if (userIndex === -1) {
+      userLoveList.push(req.params.id);
+    } else {
+      userLoveList.splice(userIndex, 1);
+    }
+    const saveLoveList = await Gig.findOneAndUpdate(
+      {
+        _id: req.params.id,
+      },
+      {
+        $set: {
+          loveSave: newLoveList,
+        },
+      },
+      {
+        new: true,
+        timestamps: false,
+      }
+    );
+    const updateUser = await User.findOneAndUpdate(
+      {
+        _id: req.body.userId,
+      },
+      {
+        $set: {
+          myLoveList: userLoveList,
+        },
+      },
+      {
+        new: true,
+        timestamps: false,
+      }
+    );
+    return res.status(200).send(updateUser);
+  } catch (err) {
+    next(err);
+  }
 };

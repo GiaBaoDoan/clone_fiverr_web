@@ -14,7 +14,6 @@ const AddSkill = ({ openThirBox, thirBox }) => {
   const onChange = (e) => {
     const { name, value } = e.target;
     addSkill({ ...skills, [name]: value });
-    setEdit(false);
   };
   // api call
   const addMoreSkill = useMutation({

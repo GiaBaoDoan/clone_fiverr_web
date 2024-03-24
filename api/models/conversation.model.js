@@ -1,6 +1,5 @@
 import mongoose from "mongoose";
 const { Schema } = mongoose;
-
 const ConversationSchema = new Schema(
   {
     id: {
@@ -31,6 +30,10 @@ const ConversationSchema = new Schema(
     userId: {
       type: String,
       require: true,
+    },
+    ratingStar: {
+      type: Boolean,
+      require: false,
     },
   },
   {
